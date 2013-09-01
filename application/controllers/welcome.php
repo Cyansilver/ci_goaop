@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+include __DIR__.'/../../vendor/autoload.php';
+include APPPATH.'/models/Broker.php';
 class Welcome extends CI_Controller {
 
 	/**
@@ -19,6 +21,17 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->library('ApplicationAspectKernel');
+		// Initialize an application aspect container
+		$applicationAspectKernel = ApplicationAspectKernel::getInstance();
+		$applicationAspectKernel->init(array(
+        		'debug' => true, // Use 'false' for production mode
+        		// Include paths restricts the directories where aspects should be applied, or empty for all source files
+        		'includePaths' => array()
+		));
+	
+		$broker = new Broker('Finch', '2');
+      		$broker->buy('MS', 10, 10);
 		$this->load->view('welcome_message');
 	}
 }
