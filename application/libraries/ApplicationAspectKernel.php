@@ -1,6 +1,9 @@
 <?php
 // app/ApplicationAspectKernel.php
-include __DIR__.'/MonitorAspect.php';
+namespace Aspect;
+
+include APPPATH . 'libraries/MonitorAspect.php';
+
 use Go\Core\AspectKernel;
 use Go\Core\AspectContainer;
 use Aspect\MonitorAspect;
